@@ -1,0 +1,150 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* Nuansa Biru */
+    background: linear-gradient(135deg, #a8dadc, #457b9d);
+    font-family: 'Arial', sans-serif;
+    overflow: hidden; /* Penting untuk animasi confetti */
+}
+
+.birthday-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 90%;
+    transform: scale(0.8); /* Ukuran awal */
+    animation: entrance 1s ease-out forwards;
+}
+
+@keyframes entrance {
+    to {
+        transform: scale(1);
+    }
+}
+
+/* --- Animasi Lilin dan Kue --- */
+.cake-container {
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer; /* Menunjukkan bisa diklik */
+    display: inline-block;
+}
+
+.cake {
+    width: 100px;
+    height: 50px;
+    background-color: #f1faee; /* Warna kue */
+    border-radius: 50px / 15px;
+    border: 5px solid #1d3557; /* Biru tua sebagai topping */
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.cake-container:hover .cake {
+    transform: translateY(-5px); /* Efek lucu saat di-hover */
+}
+
+.flame {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) scale(0); /* Awalnya tersembunyi */
+    width: 10px;
+    height: 20px;
+    background-color: #ffc300;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ffc300, 0 0 20px #ffc300;
+    z-index: 10;
+    /* Animasi Api Lucu */
+    animation: flicker 0.2s infinite alternate;
+    transition: transform 0.5s ease;
+}
+
+@keyframes flicker {
+    0% {
+        transform: translateX(-50%) scaleX(1) scaleY(1);
+        box-shadow: 0 0 8px #ffc300, 0 0 18px #ffc300;
+    }
+    100% {
+        transform: translateX(-50%) scaleX(0.95) scaleY(1.05);
+        box-shadow: 0 0 12px #ffc300, 0 0 22px #ffc300;
+    }
+}
+
+.flame.lit {
+    transform: translateX(-50%) scale(1); /* Tampilkan saat lit */
+}
+
+/* --- Teks dan Tombol --- */
+#greeting {
+    color: #1d3557;
+    margin-top: 0;
+    transition: color 0.5s ease;
+}
+
+#message {
+    color: #457b9d;
+    font-style: italic;
+    transition: opacity 1s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+#confetti-btn {
+    background-color: #e63946; /* Merah ceria */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#confetti-btn:hover {
+    background-color: #c72c38;
+}
+
+#confetti-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- Animasi Confetti (untuk efek lucu) --- */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color);
+    animation: fall 3s linear forwards;
+    opacity: 0;
+    border-radius: 50%;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
